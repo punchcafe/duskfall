@@ -1,6 +1,6 @@
 extends CharacterBody3D
 	
-var _velocity := Vector3(0,0,0)
+var _y_velocity := .0
 var _angular_velocity := .0
 var fixed_radius : float
 
@@ -10,10 +10,12 @@ func _ready():
 func _process(delta):
 	self._apply_gravity_acceleration(delta)
 	var ground_collision = self._move_and_collide_in_y(delta)
-	
 	if ground_collision:
-		if Input.is_action_pressed("jump"):
-			self._velocity += Vector3(0, 10, 0)
+		# Set velocity back to 0
+		self._y_velocity = 0
+		if Input.is_action_pressed("ui_up"):
+			self._y_velocity += 10
+			return
 		elif Input.is_action_pressed("ui_left"):
 			self._angular_velocity = -1
 		elif Input.is_action_pressed("ui_right"):
@@ -27,10 +29,10 @@ func _process(delta):
 	$CameraOrigin.rotation.y = -1 * _current_theta()
 
 func _apply_gravity_acceleration(delta) -> void:
-	self._velocity += Vector3(0, -9.8 * delta * 2, 0)
+	self._y_velocity += -9.8 * delta * 4
 	
 func _move_and_collide_in_y(delta) -> KinematicCollision3D:
-	var y_component = Vector3(0, self._velocity.y * delta, 0)
+	var y_component = Vector3(0, self._y_velocity * delta, 0)
 	return self.move_and_collide(y_component)
 
 func _current_theta() -> float:
