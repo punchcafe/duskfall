@@ -26,23 +26,25 @@ reflected_light_source = 2
 
 [node name="World" type="Node3D"]
 
-[node name="Player Orbit" type="Node3D" parent="."]
+[node name="WorldOrigin" type="Node3D" parent="."]
 
-[node name="Player" type="CharacterBody3D" parent="Player Orbit"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.730771, 0)
+[node name="Player" type="CharacterBody3D" parent="WorldOrigin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.731, 0)
 script = ExtResource("1_78cey")
 
-[node name="Camera3D" type="Camera3D" parent="Player Orbit/Player"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5, 0.767, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player Orbit/Player"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldOrigin/Player"]
 shape = SubResource("BoxShape3D_s1er0")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Player Orbit/Player"]
+[node name="OmniLight3D" type="OmniLight3D" parent="WorldOrigin/Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.168876, 0)
 
+[node name="CameraOrigin" type="Node3D" parent="WorldOrigin/Player"]
+
+[node name="Camera3D" type="Camera3D" parent="WorldOrigin/Player/CameraOrigin"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5, 0.767, 0)
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 5, 0)
+transform = Transform3D(15, 0, 0, 0, 15, 0, 0, 0, 15, 0, 5, 0)
 mesh = SubResource("CylinderMesh_jjons")
 
 [node name="Floor" type="StaticBody3D" parent="."]
@@ -59,7 +61,7 @@ mesh = SubResource("BoxMesh_n1wpq")
 transform = Transform3D(1, 0, 0, 0, -0.0239088, 0.999714, 0, -0.999714, -0.0239088, 5.11652, 4.42018, 0)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.5, 7)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_rvmpb")
