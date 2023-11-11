@@ -10,10 +10,11 @@ func _ready():
 func _process(delta):
 	self._apply_gravity_acceleration(delta)
 	var ground_collision = self._move_and_collide_in_y(delta)
+	# TODO: Confirm that the collision is underneath and not above
 	if ground_collision:
 		# Set velocity back to 0
 		self._y_velocity = 0
-		if Input.is_action_pressed("ui_up"):
+		if Input.is_action_pressed("jump"):
 			self._y_velocity += 10
 			return
 		elif Input.is_action_pressed("ui_left"):
